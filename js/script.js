@@ -7,9 +7,9 @@
 
   /* ---------- Config ---------- */
   const WHATSAPP_NUMBER = "917416771960"; // country code + number, no "+" or spaces
+  const IMG = "assets/images/";
 
   /* ---------- Gallery data ---------- */
-  const IMG = "assets/images/";
   const galleryData = [
     { src: "darvesh2.jpeg", caption: "Late Mir Imam Ali Razvi Najafi", date: "Panjeshah e Vilayath" },
     { src: "darvesh1.jpeg", caption: "Late Mir Turab Ali Razvi Najafi", date: "Panjeshah e Vilayath" },
@@ -46,21 +46,19 @@
     { src: "WhatsApp Image 2025-12-03 at 11.11.09 (2).jpeg", caption: "13th Rajab", date: "Hazrath Ali (as.) Birthday" }
   ];
 
-  /* ---------- Element references ---------- */
+  const imageUrl = (file) => encodeURI(IMG + file);
+
+  /* ---------- Elements ---------- */
   const hamburger = document.getElementById("hamburger");
   const navMenu = document.getElementById("nav-menu");
   const navLinks = document.querySelectorAll(".nav-link");
   const sections = document.querySelectorAll(".content-section");
   const galleryGrid = document.getElementById("gallery-grid");
+  const form = document.getElementById("queries-form");
 
   const lightbox = document.getElementById("lightbox-modal");
   const lightboxImage = lightbox.querySelector(".lightbox-image");
   const lightboxCaption = lightbox.querySelector(".lightbox-caption");
-  const lightboxClose = lightbox.querySelector(".lightbox-close");
-  const lightboxPrev = lightbox.querySelector(".lightbox-prev");
-  const lightboxNext = lightbox.querySelector(".lightbox-next");
-
-  const form = document.getElementById("queries-form");
 
   /* ==========================================================================
      Navigation
@@ -71,12 +69,8 @@
   };
 
   const showSection = (id) => {
-    navLinks.forEach((link) =>
-      link.classList.toggle("active", link.dataset.section === id)
-    );
-    sections.forEach((section) =>
-      section.classList.toggle("active", section.id === id)
-    );
+    navLinks.forEach((link) => link.classList.toggle("active", link.dataset.section === id));
+    sections.forEach((section) => section.classList.toggle("active", section.id === id));
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
@@ -94,35 +88,61 @@
   });
 
   document.addEventListener("click", (e) => {
-    if (window.innerWidth <= 768 && !e.target.closest(".navbar")) {
-      closeMobileMenu();
-    }
+    if (!e.target.closest(".navbar")) closeMobileMenu();
   });
 
   /* ==========================================================================
-     Gallery + Lightbox
+     Gallery
+     ========================================================================== */
+  const createGalleryItem = (item, index) => {
+    const el = document.createElement("div");
+    el.className = "gallery-item";
+    el.dataset.index = index;
+
+    const img = document.createElement("img");
+    img.className = "gallery-image";
+    img.src = imageUrl(item.src);
+    img.alt = item.caption;
+    img.loading = "lazy";
+    img.decoding = "async";
+
+    const overlay = document.createElement("div");
+    overlay.className = "gallery-overlay";
+
+    const caption = document.createElement("div");
+    caption.className = "gallery-caption";
+    caption.textContent = item.caption;
+    overlay.appendChild(caption);
+
+    if (item.date) {
+      const date = document.createElement("div");
+      date.className = "gallery-date";
+      date.textContent = item.date;
+      overlay.appendChild(date);
+    }
+
+    const icon = document.createElement("div");
+    icon.className = "gallery-icon";
+    icon.innerHTML = '<i class="fas fa-expand"></i>';
+
+    el.append(img, overlay, icon);
+    return el;
+  };
+
+  const renderGallery = () => {
+    const fragment = document.createDocumentFragment();
+    galleryData.forEach((item, index) => fragment.appendChild(createGalleryItem(item, index)));
+    galleryGrid.appendChild(fragment);
+  };
+
+  /* ==========================================================================
+     Lightbox
      ========================================================================== */
   let currentIndex = 0;
 
-  const renderGallery = () => {
-    galleryGrid.innerHTML = galleryData
-      .map(
-        (item, index) => `
-          <div class="gallery-item" data-index="${index}">
-            <img class="gallery-image" loading="lazy" alt="${item.caption}" src="${IMG + item.src}">
-            <div class="gallery-overlay">
-              <div class="gallery-caption">${item.caption}</div>
-              ${item.date ? `<div class="gallery-date">${item.date}</div>` : ""}
-            </div>
-            <div class="gallery-icon"><i class="fas fa-expand"></i></div>
-          </div>`
-      )
-      .join("");
-  };
-
   const updateLightbox = () => {
     const item = galleryData[currentIndex];
-    lightboxImage.src = IMG + item.src;
+    lightboxImage.src = imageUrl(item.src);
     lightboxImage.alt = item.caption;
     lightboxCaption.textContent = item.caption;
   };
@@ -130,13 +150,13 @@
   const openLightbox = (index) => {
     currentIndex = index;
     updateLightbox();
-    lightbox.style.display = "block";
+    lightbox.classList.add("open");
     document.body.style.overflow = "hidden";
   };
 
   const closeLightbox = () => {
-    lightbox.style.display = "none";
-    document.body.style.overflow = "auto";
+    lightbox.classList.remove("open");
+    document.body.style.overflow = "";
   };
 
   const step = (direction) => {
@@ -149,72 +169,59 @@
     if (item) openLightbox(Number(item.dataset.index));
   });
 
-  lightboxClose.addEventListener("click", closeLightbox);
-
   lightbox.addEventListener("click", (e) => {
-    if (e.target === lightbox) closeLightbox();
-  });
-
-  lightboxPrev.addEventListener("click", (e) => {
-    e.stopPropagation();
-    step(-1);
-  });
-
-  lightboxNext.addEventListener("click", (e) => {
-    e.stopPropagation();
-    step(1);
+    if (e.target === lightbox) return closeLightbox();
+    if (e.target.closest(".lightbox-close")) return closeLightbox();
+    if (e.target.closest(".lightbox-prev")) return step(-1);
+    if (e.target.closest(".lightbox-next")) return step(1);
   });
 
   document.addEventListener("keydown", (e) => {
-    if (lightbox.style.display !== "block") return;
+    if (!lightbox.classList.contains("open")) return;
     if (e.key === "Escape") closeLightbox();
     if (e.key === "ArrowLeft") step(-1);
     if (e.key === "ArrowRight") step(1);
   });
 
-  renderGallery();
-
-    /* ==========================================================================
-     Scroll reveal animation
-     ========================================================================== */
-  const revealSelectors = [
-    ".info-section",
-    ".historical-event",
-    ".victory-section",
-    ".miracle-section",
-    ".relic-section",
-    ".succession-section",
-    ".artifacts-section",
-    ".mutawalli-profile",
-    ".majlis-schedule",
-    ".prayer-time",
-    ".contact-detail",
-    ".gallery-item",
-    ".connect-icon",
-    ".queries-section"
-  ].join(",");
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("in-view");
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.12 }
-  );
-
-  document.querySelectorAll(revealSelectors).forEach((el, i) => {
-    el.classList.add("reveal");
-    el.style.transitionDelay = `${(i % 4) * 80}ms`; // small stagger
-    observer.observe(el);
-  });
-   
-   
   /* ==========================================================================
-     Contact form → WhatsApp
+     Scroll reveal (one time only, then the class is removed so hover stays fast)
+     ========================================================================== */
+  const initReveal = () => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const targets = document.querySelectorAll(
+      ".info-section, .historical-event, .victory-section, .miracle-section, " +
+      ".relic-section, .succession-section, .artifacts-section, .mutawalli-profile, " +
+      ".majlis-schedule, .prayer-time, .contact-detail, .gallery-item, " +
+      ".connect-icon, .queries-section"
+    );
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const el = entry.target;
+          el.classList.add("in-view");
+          observer.unobserve(el);
+
+          setTimeout(() => {
+            el.classList.remove("reveal", "in-view");
+            el.style.transitionDelay = "";
+          }, 900);
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    targets.forEach((el, i) => {
+      el.classList.add("reveal");
+      el.style.transitionDelay = `${(i % 4) * 60}ms`;
+      observer.observe(el);
+    });
+  };
+
+  /* ==========================================================================
+     Contact form -> WhatsApp
      ========================================================================== */
   if (form) {
     form.addEventListener("submit", (e) => {
@@ -243,10 +250,17 @@
         message
       ].join("\n");
 
-      const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+      window.open(
+        `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`,
+        "_blank",
+        "noopener"
+      );
 
-      window.open(url, "_blank", "noopener");
       form.reset();
     });
   }
+
+  /* ---------- Start ---------- */
+  renderGallery();
+  initReveal();
 })();
