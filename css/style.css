@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Panjeshah-e-Vilayath: Light theme with JET BLACK & ULTRA GOLD Header
+   Panjeshah-e-Vilayath: WEBSITE CSS CODE
    ========================================================================== */
 
 /* Optional: Import luxury serif & Nastaliq fonts for true metallic calligraphy */
@@ -91,25 +91,25 @@ ul { list-style: none; }
   100% { background-position: 100% 50%; }
 }
 
-/* ==========================================================================
-   HEADER: PURE JET BLACK (#000000) & INTENSE GOLDEN GLOW SHADING
-   ========================================================================== */
+/* ---------- Header: Luxury Metallic Black & Golden Glow ---------- */
 .page-header {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 185px;
-  padding: 36px 24px;
+  min-height: 175px;
+  padding: 34px 24px;
   
-  /* Pure Jet Black Background */
-  background: #000000 !important;
-  border-bottom: 1px solid rgba(255, 215, 0, 0.4);
-  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.95);
+  /* Metallic Obsidian Black finish with top specular reflection */
+  background:
+    radial-gradient(ellipse 90% 45% at 50% 0%, rgba(255, 255, 255, 0.08) 0%, transparent 75%),
+    linear-gradient(180deg, #000000 0%, #000000 35%, #000000 70%, #000000 100%);
+  border-bottom: 1px solid rgba(233, 196, 106, 0.3);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
   overflow: hidden;
 }
 
-/* Bottom Gleaming 24K Gold Line */
+/* Bottom Metallic Gold Hairline Accent */
 .page-header::after {
   content: "";
   position: absolute;
@@ -118,15 +118,14 @@ ul { list-style: none; }
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(255, 215, 0, 0.25) 15%,
-    #ffd700 40%,
-    #ffffff 50%,
-    #ffd700 60%,
-    rgba(255, 215, 0, 0.25) 85%,
+    rgba(184, 137, 43, 0.3) 15%,
+    #ffd700 35%,
+    #fff8db 50%,
+    #ffd700 65%,
+    rgba(184, 137, 43, 0.3) 85%,
     transparent 100%
   );
-  box-shadow: 0 0 16px rgba(255, 215, 0, 0.9), 0 0 32px rgba(255, 180, 0, 0.5);
-  z-index: 5;
+  box-shadow: 0 -1px 12px rgba(255, 215, 0, 0.6);
 }
 
 .header-logo,
@@ -134,7 +133,7 @@ ul { list-style: none; }
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  z-index: 4;
+  z-index: 2;
 }
 
 .header-logo { left: 32px; }
@@ -142,149 +141,119 @@ ul { list-style: none; }
 
 .header-logo img,
 .header-logo-right img {
-  width: 90px;
-  height: 90px;
+  width: 88px;
+  height: 88px;
   object-fit: cover;
-  border: 3px solid #ffd700;
+  border: 3px solid var(--gold-bright);
   border-radius: 50%;
   box-shadow: 
-    0 0 24px rgba(255, 215, 0, 0.65),
-    0 0 45px rgba(230, 160, 10, 0.35),
-    0 8px 24px rgba(0, 0, 0, 0.9);
+    0 0 20px rgba(233, 196, 106, 0.45),
+    0 8px 24px rgba(0, 0, 0, 0.7);
   transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
 }
 
 .header-logo img:hover,
 .header-logo-right img:hover {
-  transform: scale(1.06);
+  transform: scale(1.05);
   box-shadow: 
-    0 0 35px rgba(255, 225, 75, 0.9),
-    0 0 60px rgba(255, 195, 25, 0.5);
+    0 0 28px rgba(255, 215, 0, 0.75),
+    0 10px 28px rgba(0, 0, 0, 0.8);
 }
 
-/* Header Content Container */
+/* Header Content with Exact Ambient Golden Aura Shading */
 .header-content {
   position: relative;
-  padding: 0 110px;
+  padding: 0 120px;
   text-align: center;
-  z-index: 2;
-  width: 100%;
-  max-width: 950px;
-  margin: 0 auto;
+  z-index: 1;
 }
 
-/* Layer 1: Wide Golden Ambient Sunburst Shading */
+/* The exact diffuse golden-yellow shading/halo from your screenshot */
 .header-content::before {
   content: "";
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 125%;
-  max-width: 920px;
-  height: 180%;
+  width: 100%;
+  max-width: 720px;
+  height: 140%;
   background: radial-gradient(
-    ellipse 70% 60% at 50% 50%,
-    rgba(255, 225, 75, 0.95) 0%,
-    rgba(255, 195, 25, 0.78) 30%,
-    rgba(240, 160, 0, 0.48) 55%,
-    rgba(200, 130, 0, 0.20) 75%,
-    transparent 90%
-  );
-  filter: blur(45px);
-  pointer-events: none;
-  z-index: 0;
-  border-radius: 50%;
-}
-
-/* Layer 2: Concentrated Radiant Hot Gold Core (Extra Intense Shading) */
-.header-content::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 78%;
-  max-width: 620px;
-  height: 125%;
-  background: radial-gradient(
-    ellipse 60% 50% at 50% 50%,
-    rgba(255, 245, 160, 0.95) 0%,
-    rgba(255, 210, 45, 0.72) 35%,
-    rgba(240, 165, 10, 0.32) 65%,
+    ellipse 65% 55% at 50% 50%,
+    rgba(255, 222, 89, 0.65) 0%,
+    rgba(250, 204, 46, 0.45) 35%,
+    rgba(240, 185, 30, 0.22) 60%,
+    rgba(212, 175, 55, 0.08) 75%,
     transparent 100%
   );
-  filter: blur(24px);
+  filter: blur(35px);
   pointer-events: none;
-  z-index: 0;
+  z-index: -1;
   border-radius: 50%;
 }
 
-/* English Main Title: Polished 24K Gold with Intense Bloom */
+/* English Main Title: Metallic Gold with Outer Bloom */
 .page-header h1 {
   position: relative;
-  z-index: 2;
   font-family: 'Cinzel', -apple-system, BlinkMacSystemFont, "Segoe UI", serif;
   font-size: clamp(1.4rem, 2.7vw, 2.3rem);
-  font-weight: 900;
-  letter-spacing: 0.04em;
+  font-weight: 800;
+  letter-spacing: 0.03em;
   text-transform: uppercase;
   margin: 0;
   
-  /* Highly saturated 24K Liquid Gold gradient */
+  /* Multi-stop metallic gold reflection */
   background: linear-gradient(
     135deg,
-    #c4941d 0%,
-    #ffd700 18%,
-    #ffffff 36%,
-    #ffd700 52%,
-    #ffae00 70%,
-    #aa771c 85%,
+    #b8860b 0%,
+    #ffd700 20%,
+    #fff8db 38%,
+    #d4af37 55%,
+    #f5d77f 72%,
+    #aa771c 88%,
     #ffe89e 100%
   );
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 
-  /* Amplified golden corona glow */
+  /* Golden corona glow */
   filter: 
-    drop-shadow(0 0 12px rgba(255, 225, 75, 0.95))
-    drop-shadow(0 0 30px rgba(255, 195, 25, 0.85))
-    drop-shadow(0 0 65px rgba(240, 160, 0, 0.65))
-    drop-shadow(0 0 95px rgba(212, 130, 0, 0.45));
+    drop-shadow(0 0 10px rgba(255, 215, 0, 0.8))
+    drop-shadow(0 0 25px rgba(245, 197, 24, 0.55))
+    drop-shadow(0 0 50px rgba(230, 160, 10, 0.35));
   
   animation: goldShimmer 10s ease-in-out infinite alternate;
 }
 
-/* Urdu / Arabic Calligraphy Subtitle */
+/* Urdu / Arabic Calligraphy Subtitle: Matching Metallic Gold */
 .page-header h2 {
   position: relative;
-  z-index: 2;
-  margin-top: 10px;
+  margin-top: 8px;
   font-family: 'Noto Nastaliq Urdu', 'Amiri', serif, var(--font);
-  font-size: clamp(1.3rem, 2.2vw, 1.9rem);
+  font-size: clamp(1.2rem, 2.1vw, 1.8rem);
   font-weight: 700;
   letter-spacing: 0.02em;
 
+  /* Multi-stop metallic gold reflection */
   background: linear-gradient(
     135deg,
-    #c4941d 0%,
-    #ffd700 18%,
-    #ffffff 36%,
-    #ffd700 52%,
-    #ffae00 70%,
-    #aa771c 85%,
+    #b8860b 0%,
+    #ffd700 20%,
+    #fff8db 38%,
+    #d4af37 55%,
+    #f5d77f 72%,
+    #aa771c 88%,
     #ffe89e 100%
   );
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 
-  /* Saturated golden glow */
+  /* Golden corona glow */
   filter: 
-    drop-shadow(0 0 12px rgba(255, 225, 75, 0.95))
-    drop-shadow(0 0 30px rgba(255, 195, 25, 0.85))
-    drop-shadow(0 0 65px rgba(240, 160, 0, 0.60));
+    drop-shadow(0 0 10px rgba(255, 215, 0, 0.8))
+    drop-shadow(0 0 25px rgba(245, 197, 24, 0.50));
 }
 
 /* ---------- Navigation ---------- */
@@ -1090,7 +1059,7 @@ ul { list-style: none; }
    ========================================================================== */
 @media (max-width: 1024px) {
   .content-section { padding: 44px 32px; }
-  .header-content { padding: 0 80px; }
+  .header-content { padding: 0 110px; }
 }
 
 /* ==========================================================================
@@ -1107,7 +1076,6 @@ ul { list-style: none; }
     grid-template-columns: 1fr 1fr;
     gap: 14px;
     padding: 20px 16px 24px;
-    min-height: auto;
   }
 
   .header-logo,
@@ -1118,22 +1086,12 @@ ul { list-style: none; }
 
   .header-logo { grid-area: left; justify-self: start; }
   .header-logo-right { grid-area: right; justify-self: end; }
-  
-  .header-content { 
-    grid-area: title; 
-    padding: 0; 
-  }
+  .header-content { grid-area: title; padding: 0; }
 
   .header-content::before {
-    width: 135%;
-    height: 140%;
-    filter: blur(30px);
-  }
-
-  .header-content::after {
-    width: 90%;
-    height: 110%;
-    filter: blur(18px);
+    width: 130%;
+    height: 120%;
+    filter: blur(25px);
   }
 
   .header-logo img,
@@ -1206,7 +1164,7 @@ ul { list-style: none; }
     text-align: left;
   }
 
-  /* Prayer and gallery */
+  /* Prayer and gallery (phones have no hover, so captions stay visible) */
   .prayer-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
 
   .gallery-grid {
