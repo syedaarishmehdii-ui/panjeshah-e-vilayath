@@ -118,14 +118,15 @@ ul { list-style: none; }
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(184, 137, 43, 0.3) 15%,
-    #ffd700 35%,
-    #fff8db 50%,
-    #ffd700 65%,
-    rgba(184, 137, 43, 0.3) 85%,
+    rgba(255, 215, 0, 0.25) 15%,
+    #ffd700 40%,
+    #ffffff 50%,
+    #ffd700 60%,
+    rgba(255, 215, 0, 0.25) 85%,
     transparent 100%
   );
-  box-shadow: 0 -1px 12px rgba(255, 215, 0, 0.6);
+  box-shadow: 0 0 16px rgba(255, 215, 0, 0.85);
+  z-index: 5;
 }
 
 .header-logo,
@@ -133,7 +134,7 @@ ul { list-style: none; }
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  z-index: 2;
+  z-index: 4;
 }
 
 .header-logo { left: 32px; }
@@ -141,14 +142,14 @@ ul { list-style: none; }
 
 .header-logo img,
 .header-logo-right img {
-  width: 88px;
-  height: 88px;
+  width: 90px;
+  height: 90px;
   object-fit: cover;
-  border: 3px solid var(--gold-bright);
+  border: 3px solid #ffd700;
   border-radius: 50%;
   box-shadow: 
-    0 0 20px rgba(233, 196, 106, 0.45),
-    0 8px 24px rgba(0, 0, 0, 0.7);
+    0 0 22px rgba(255, 215, 0, 0.6),
+    0 8px 24px rgba(0, 0, 0, 0.9);
   transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
 }
 
@@ -156,8 +157,8 @@ ul { list-style: none; }
 .header-logo-right img:hover {
   transform: scale(1.05);
   box-shadow: 
-    0 0 28px rgba(255, 215, 0, 0.75),
-    0 10px 28px rgba(0, 0, 0, 0.8);
+    0 0 32px rgba(255, 225, 75, 0.85),
+    0 10px 28px rgba(0, 0, 0, 0.95);
 }
 
 /* Header Content with Exact Ambient Golden Aura Shading */
@@ -165,7 +166,8 @@ ul { list-style: none; }
   position: relative;
   padding: 0 120px;
   text-align: center;
-  z-index: 1;
+  z-index: 2;
+  overflow: visible;              /* FIX: Never clips text */
 }
 
 /* The exact diffuse golden-yellow shading/halo from your screenshot */
@@ -175,42 +177,45 @@ ul { list-style: none; }
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 100%;
-  max-width: 720px;
-  height: 140%;
+  width: 125%;
+  max-width: 900px;
+  height: 180%;
   background: radial-gradient(
-    ellipse 65% 55% at 50% 50%,
-    rgba(255, 222, 89, 0.65) 0%,
-    rgba(250, 204, 46, 0.45) 35%,
-    rgba(240, 185, 30, 0.22) 60%,
-    rgba(212, 175, 55, 0.08) 75%,
-    transparent 100%
+    ellipse 70% 60% at 50% 50%,
+    rgba(255, 225, 75, 0.92) 0%,
+    rgba(255, 195, 25, 0.75) 30%,
+    rgba(240, 160, 0, 0.45) 55%,
+    rgba(200, 130, 0, 0.18) 75%,
+    transparent 90%
   );
-  filter: blur(35px);
+  filter: blur(45px);
   pointer-events: none;
-  z-index: -1;
+  z-index: 0;
   border-radius: 50%;
 }
 
 /* English Main Title: Metallic Gold with Outer Bloom */
 .page-header h1 {
   position: relative;
+  z-index: 2;
   font-family: 'Cinzel', -apple-system, BlinkMacSystemFont, "Segoe UI", serif;
   font-size: clamp(1.4rem, 2.7vw, 2.3rem);
   font-weight: 800;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   margin: 0;
+  line-height: 1.4;                /* FIX: Comfortable spacing for letters */
+  padding: 6px 0;                 /* FIX: Room for glow */
   
   /* Multi-stop metallic gold reflection */
   background: linear-gradient(
     135deg,
-    #b8860b 0%,
-    #ffd700 20%,
-    #fff8db 38%,
-    #d4af37 55%,
-    #f5d77f 72%,
-    #aa771c 88%,
+    #c4941d 0%,
+    #ffd700 18%,
+    #ffffff 36%,
+    #ffd700 52%,
+    #ffae00 70%,
+    #aa771c 85%,
     #ffe89e 100%
   );
   background-size: 200% auto;
@@ -219,9 +224,9 @@ ul { list-style: none; }
 
   /* Golden corona glow */
   filter: 
-    drop-shadow(0 0 10px rgba(255, 215, 0, 0.8))
-    drop-shadow(0 0 25px rgba(245, 197, 24, 0.55))
-    drop-shadow(0 0 50px rgba(230, 160, 10, 0.35));
+    drop-shadow(0 0 12px rgba(255, 225, 75, 0.95))
+    drop-shadow(0 0 28px rgba(255, 195, 25, 0.8))
+    drop-shadow(0 0 60px rgba(240, 160, 0, 0.6));
   
   animation: goldShimmer 10s ease-in-out infinite alternate;
 }
@@ -229,21 +234,24 @@ ul { list-style: none; }
 /* Urdu / Arabic Calligraphy Subtitle: Matching Metallic Gold */
 .page-header h2 {
   position: relative;
-  margin-top: 8px;
+  z-index: 2;
+  margin-top: 6px;
   font-family: 'Noto Nastaliq Urdu', 'Amiri', serif, var(--font);
-  font-size: clamp(1.2rem, 2.1vw, 1.8rem);
+  font-size: clamp(1.3rem, 2.2vw, 2rem);
   font-weight: 700;
   letter-spacing: 0.02em;
+  line-height: 2.1;               /* FIX: Essential for tall Urdu Alifs & Nuktas */
+  padding: 8px 0 14px;            /* FIX: Prevents cutting top of calligraphy */
 
   /* Multi-stop metallic gold reflection */
   background: linear-gradient(
     135deg,
-    #b8860b 0%,
-    #ffd700 20%,
-    #fff8db 38%,
-    #d4af37 55%,
-    #f5d77f 72%,
-    #aa771c 88%,
+    #c4941d 0%,
+    #ffd700 18%,
+    #ffffff 36%,
+    #ffd700 52%,
+    #ffae00 70%,
+    #aa771c 85%,
     #ffe89e 100%
   );
   background-size: 200% auto;
@@ -252,8 +260,9 @@ ul { list-style: none; }
 
   /* Golden corona glow */
   filter: 
-    drop-shadow(0 0 10px rgba(255, 215, 0, 0.8))
-    drop-shadow(0 0 25px rgba(245, 197, 24, 0.50));
+    drop-shadow(0 0 12px rgba(255, 225, 75, 0.95))
+    drop-shadow(0 0 28px rgba(255, 195, 25, 0.8))
+    drop-shadow(0 0 60px rgba(240, 160, 0, 0.6));
 }
 
 /* ---------- Navigation ---------- */
@@ -1272,4 +1281,62 @@ ul { list-style: none; }
   }
 
   .reveal { opacity: 1; transform: none; }
+}
+
+
+/* Container with soft golden backlight glow */
+.golden-emblem-container {
+  position: relative;
+  display: inline-block;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.golden-emblem-container::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120%;
+  max-width: 600px;
+  height: 140%;
+  background: radial-gradient(
+    ellipse 65% 55% at 50% 50%,
+    rgba(255, 225, 75, 0.70) 0%,
+    rgba(255, 195, 25, 0.40) 35%,
+    rgba(212, 140, 0, 0.12) 65%,
+    transparent 85%
+  );
+  filter: blur(35px);
+  pointer-events: none;
+  z-index: 0;
+  border-radius: 50%;
+}
+
+/* 3D Transparent Gold Emblem */
+.golden-emblem-container img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 480px;               /* Clean, prominent display */
+  height: auto;
+  margin: 0 auto;
+  display: block;
+  border: none !important;
+  background: transparent !important;
+  
+  /* Luminous golden glow conforming directly to the calligraphy */
+  filter: 
+    drop-shadow(0 0 14px rgba(255, 225, 75, 0.85))
+    drop-shadow(0 0 30px rgba(255, 195, 25, 0.55))
+    drop-shadow(0 12px 25px rgba(0, 0, 0, 0.95));
+  transition: transform 0.3s var(--ease), filter 0.3s var(--ease);
+}
+
+.golden-emblem-container img:hover {
+  transform: translateY(-3px) scale(1.02);
+  filter: 
+    drop-shadow(0 0 20px rgba(255, 235, 95, 0.95))
+    drop-shadow(0 0 40px rgba(255, 205, 35, 0.75));
 }
