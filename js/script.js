@@ -174,6 +174,45 @@
 
   renderGallery();
 
+    /* ==========================================================================
+     Scroll reveal animation
+     ========================================================================== */
+  const revealSelectors = [
+    ".info-section",
+    ".historical-event",
+    ".victory-section",
+    ".miracle-section",
+    ".relic-section",
+    ".succession-section",
+    ".artifacts-section",
+    ".mutawalli-profile",
+    ".majlis-schedule",
+    ".prayer-time",
+    ".contact-detail",
+    ".gallery-item",
+    ".connect-icon",
+    ".queries-section"
+  ].join(",");
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in-view");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.12 }
+  );
+
+  document.querySelectorAll(revealSelectors).forEach((el, i) => {
+    el.classList.add("reveal");
+    el.style.transitionDelay = `${(i % 4) * 80}ms`; // small stagger
+    observer.observe(el);
+  });
+   
+   
   /* ==========================================================================
      Contact form → WhatsApp
      ========================================================================== */
