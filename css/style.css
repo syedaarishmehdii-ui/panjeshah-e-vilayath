@@ -1,11 +1,15 @@
 /* ==========================================================================
-   Panjeshah-e-Vilayath: light theme with black and gold
+   Panjeshah-e-Vilayath: WEBSITE CSS CODE
    ========================================================================== */
+
+/* Optional: Import luxury serif & Nastaliq fonts for true metallic calligraphy */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Noto+Nastaliq+Urdu:wght@600;700&display=swap');
 
 /* ---------- Tokens ---------- */
 :root {
   --gold: #b8892b;
-  --gold-bright: #e9c46a;
+  --gold-bright: #ffd700;
+  --gold-light: #fff8db;
   --gold-deep: #8a6212;
   --gold-soft: #f6e7bf;
   --ink: #111111;
@@ -82,23 +86,46 @@ ul { list-style: none; }
   to   { opacity: 1; }
 }
 
-/* ---------- Header ---------- */
+@keyframes goldShimmer {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+/* ---------- Header: Luxury Metallic Black & Golden Glow ---------- */
 .page-header {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 150px;
-  padding: 28px 24px;
-  background: linear-gradient(180deg, #ffffff 0%, #fbf3df 100%);
+  min-height: 175px;
+  padding: 34px 24px;
+  
+  /* Metallic Obsidian Black finish with top specular reflection */
+  background:
+    radial-gradient(ellipse 90% 45% at 50% 0%, rgba(255, 255, 255, 0.08) 0%, transparent 75%),
+    linear-gradient(180deg, #18191d 0%, #0c0d0f 35%, #050607 70%, #111215 100%);
+  border-bottom: 1px solid rgba(233, 196, 106, 0.3);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
 }
 
+/* Bottom Metallic Gold Hairline Accent */
 .page-header::after {
   content: "";
   position: absolute;
   inset: auto 0 0 0;
-  height: 4px;
-  background: linear-gradient(90deg, var(--ink), var(--gold), var(--gold-bright), var(--gold), var(--ink));
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(184, 137, 43, 0.3) 15%,
+    #ffd700 35%,
+    #fff8db 50%,
+    #ffd700 65%,
+    rgba(184, 137, 43, 0.3) 85%,
+    transparent 100%
+  );
+  box-shadow: 0 -1px 12px rgba(255, 215, 0, 0.6);
 }
 
 .header-logo,
@@ -106,6 +133,7 @@ ul { list-style: none; }
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+  z-index: 2;
 }
 
 .header-logo { left: 32px; }
@@ -116,28 +144,116 @@ ul { list-style: none; }
   width: 88px;
   height: 88px;
   object-fit: cover;
-  border: 3px solid var(--gold);
+  border: 3px solid var(--gold-bright);
   border-radius: 50%;
-  box-shadow: 0 6px 18px rgba(184, 137, 43, 0.35);
+  box-shadow: 
+    0 0 20px rgba(233, 196, 106, 0.45),
+    0 8px 24px rgba(0, 0, 0, 0.7);
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
 }
 
+.header-logo img:hover,
+.header-logo-right img:hover {
+  transform: scale(1.05);
+  box-shadow: 
+    0 0 28px rgba(255, 215, 0, 0.75),
+    0 10px 28px rgba(0, 0, 0, 0.8);
+}
+
+/* Header Content with Exact Ambient Golden Aura Shading */
 .header-content {
+  position: relative;
   padding: 0 120px;
   text-align: center;
+  z-index: 1;
 }
 
+/* The exact diffuse golden-yellow shading/halo from your screenshot */
+.header-content::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 720px;
+  height: 140%;
+  background: radial-gradient(
+    ellipse 65% 55% at 50% 50%,
+    rgba(255, 222, 89, 0.65) 0%,
+    rgba(250, 204, 46, 0.45) 35%,
+    rgba(240, 185, 30, 0.22) 60%,
+    rgba(212, 175, 55, 0.08) 75%,
+    transparent 100%
+  );
+  filter: blur(35px);
+  pointer-events: none;
+  z-index: -1;
+  border-radius: 50%;
+}
+
+/* English Main Title: Metallic Gold with Outer Bloom */
 .page-header h1 {
-  font-size: clamp(1.3rem, 2.6vw, 2.2rem);
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  color: var(--ink);
+  position: relative;
+  font-family: 'Cinzel', -apple-system, BlinkMacSystemFont, "Segoe UI", serif;
+  font-size: clamp(1.4rem, 2.7vw, 2.3rem);
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  margin: 0;
+  
+  /* Multi-stop metallic gold reflection */
+  background: linear-gradient(
+    135deg,
+    #b8860b 0%,
+    #ffd700 20%,
+    #fff8db 38%,
+    #d4af37 55%,
+    #f5d77f 72%,
+    #aa771c 88%,
+    #ffe89e 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  /* Golden corona glow */
+  filter: 
+    drop-shadow(0 0 10px rgba(255, 215, 0, 0.8))
+    drop-shadow(0 0 25px rgba(245, 197, 24, 0.55))
+    drop-shadow(0 0 50px rgba(230, 160, 10, 0.35));
+  
+  animation: goldShimmer 10s ease-in-out infinite alternate;
 }
 
+/* Urdu / Arabic Calligraphy Subtitle: Matching Metallic Gold */
 .page-header h2 {
+  position: relative;
   margin-top: 8px;
-  font-size: clamp(1.1rem, 2vw, 1.6rem);
-  font-weight: 400;
-  color: var(--gold-deep);
+  font-family: 'Noto Nastaliq Urdu', 'Amiri', serif, var(--font);
+  font-size: clamp(1.2rem, 2.1vw, 1.8rem);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+
+  /* Multi-stop metallic gold reflection */
+  background: linear-gradient(
+    135deg,
+    #b8860b 0%,
+    #ffd700 20%,
+    #fff8db 38%,
+    #d4af37 55%,
+    #f5d77f 72%,
+    #aa771c 88%,
+    #ffe89e 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  /* Golden corona glow */
+  filter: 
+    drop-shadow(0 0 10px rgba(255, 215, 0, 0.8))
+    drop-shadow(0 0 25px rgba(245, 197, 24, 0.50));
 }
 
 /* ---------- Navigation ---------- */
@@ -145,7 +261,7 @@ ul { list-style: none; }
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: rgba(255, 255, 255, 0.88);
+  background: rgba(255, 255, 255, 0.92);
   -webkit-backdrop-filter: saturate(180%) blur(14px);
   backdrop-filter: saturate(180%) blur(14px);
   border-bottom: 1px solid var(--line);
@@ -971,6 +1087,12 @@ ul { list-style: none; }
   .header-logo { grid-area: left; justify-self: start; }
   .header-logo-right { grid-area: right; justify-self: end; }
   .header-content { grid-area: title; padding: 0; }
+
+  .header-content::before {
+    width: 130%;
+    height: 120%;
+    filter: blur(25px);
+  }
 
   .header-logo img,
   .header-logo-right img {
