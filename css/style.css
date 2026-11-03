@@ -1320,3 +1320,381 @@ ul { list-style: none; }
 
   .reveal { opacity: 1; transform: none; }
 }
+/* ==========================================================================
+   BLACK · RED · GOLD THEME  (paste at the end of style.css)
+   Transparent glass cards over the Imam Ali (a.s.) shrine background
+   ========================================================================== */
+
+:root {
+  --gold: #f5c04e;
+  --gold-deep: #b8871b;
+  --gold-soft: #ffe2a0;
+  --glass: rgba(10, 0, 0, 0.42);
+  --glass-light: rgba(255, 255, 255, 0.07);
+  --glass-border: rgba(245, 192, 78, 0.32);
+  --text-light: rgba(255, 255, 255, 0.86);
+}
+
+/* ---------- Shrine background (slow cinematic zoom) ---------- */
+body {
+  background: #000;
+}
+
+body::before {
+  background:
+    radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 35%, rgba(0, 0, 0, 0.55) 100%),
+    linear-gradient(rgba(0, 0, 0, 0.28), rgba(25, 0, 0, 0.55)),
+    url("../assets/images/bg.jpg") center / cover no-repeat,
+    linear-gradient(135deg, #000, #3a0500);
+  animation: bgZoom 30s ease-in-out infinite alternate;
+}
+
+@keyframes bgZoom {
+  from { transform: scale(1); }
+  to   { transform: scale(1.1); }
+}
+
+@keyframes goldFlow {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 300% 50%; }
+}
+
+@keyframes sheen {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(100%); }
+}
+
+/* ---------- Header: black + red + gold flowing ---------- */
+.page-header {
+  background:
+    linear-gradient(120deg,
+      #000000 0%, #3a0000 20%, #000000 40%,
+      #4a3200 55%, #000000 70%, #5a0000 85%, #000000 100%);
+  background-size: 300% 100%;
+  animation: slideDown 0.7s var(--ease), goldFlow 14s linear infinite;
+  border-bottom: none;
+}
+
+/* moving light sweep across the header */
+.page-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg,
+    transparent 30%, rgba(245, 192, 78, 0.14) 50%, transparent 70%);
+  animation: sheen 6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* thick flowing red/gold line */
+.page-header::after,
+.site-footer::before {
+  height: 4px;
+  background: linear-gradient(90deg,
+    #e11d12, #f5c04e, #ffffff, #f5c04e, #e11d12, #f5c04e, #e11d12);
+  background-size: 300% 100%;
+  animation: goldFlow 5s linear infinite;
+  box-shadow: 0 0 14px rgba(245, 192, 78, 0.7);
+}
+
+.header-logo img,
+.header-logo-right img {
+  border: 3px solid var(--gold);
+  box-shadow: 0 0 22px rgba(245, 192, 78, 0.65), 0 0 44px rgba(225, 29, 18, 0.45);
+}
+
+/* gold shimmering title */
+.page-header h1 {
+  background: linear-gradient(90deg, #ffffff, #f5c04e, #ffffff, #f5c04e, #ffffff);
+  background-size: 300% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: none;
+  filter: drop-shadow(0 0 12px rgba(225, 29, 18, 0.7));
+  animation: goldFlow 8s linear infinite;
+}
+
+.page-header h2 {
+  color: var(--gold-soft);
+  text-shadow: 0 0 16px rgba(225, 29, 18, 0.85), 0 0 4px rgba(245, 192, 78, 0.6);
+}
+
+/* ---------- Navigation: black glass + gold ---------- */
+.navbar {
+  background: rgba(0, 0, 0, 0.62);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.nav-menu a { color: var(--gold-soft); }
+
+.nav-menu a:hover {
+  background: rgba(245, 192, 78, 0.14);
+  color: #fff;
+}
+
+.nav-menu a.active {
+  color: #fff;
+  background: linear-gradient(135deg, #e11d12, #8f0b06);
+  box-shadow: 0 0 0 1px var(--gold), 0 4px 18px rgba(225, 29, 18, 0.55);
+}
+
+.hamburger span { background: var(--gold); }
+
+/* ---------- Transparent glass sections ---------- */
+.content-section {
+  background: var(--glass);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  backdrop-filter: blur(14px) saturate(140%);
+  border: 1px solid var(--glass-border);
+  border-top: 4px solid var(--gold);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.55);
+}
+
+.section-title {
+  background: linear-gradient(90deg, #ffffff, #f5c04e, #e11d12, #f5c04e, #ffffff);
+  background-size: 300% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: goldFlow 9s linear infinite;
+}
+
+.section-title::after {
+  background: linear-gradient(90deg, var(--red), var(--gold), var(--red));
+}
+
+.bargah-name,
+.image-title,
+.mutawalli-name-title {
+  color: var(--gold);
+  text-shadow: 0 0 18px rgba(225, 29, 18, 0.6);
+}
+
+.home-image,
+.about-image,
+.mutawalli-image {
+  border: 3px solid var(--gold);
+  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.6), 0 0 32px rgba(245, 192, 78, 0.3);
+}
+
+/* ---------- Transparent cards ---------- */
+.info-section,
+.historical-event,
+.victory-section,
+.miracle-section,
+.relic-section,
+.succession-section,
+.artifacts-section,
+.mutawalli-profile,
+.majlis-schedule,
+.prayer-times,
+.contact-info,
+.connect-with-us-section,
+.queries-section {
+  background: var(--glass-light);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-left: 5px solid var(--red);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+}
+
+.info-section:hover,
+.historical-event:hover,
+.victory-section:hover,
+.miracle-section:hover,
+.relic-section:hover,
+.succession-section:hover,
+.artifacts-section:hover,
+.majlis-schedule:hover {
+  border-left-color: var(--gold);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.5), 0 0 28px rgba(245, 192, 78, 0.25);
+}
+
+.connect-with-us-section,
+.queries-section {
+  border: 1px solid var(--glass-border);
+}
+
+/* ---------- Text colours for the dark glass ---------- */
+.info-section h3,
+.historical-event h4,
+.victory-section h4,
+.miracle-section h4,
+.relic-section h4,
+.succession-section h4,
+.artifacts-section h4,
+.majlis-schedule h3,
+.contact-info h3,
+.detailed-description h3,
+.prayer-times h3,
+.connect-title,
+.queries-title {
+  color: var(--gold);
+  border-bottom-color: rgba(245, 192, 78, 0.3);
+}
+
+.queries-title { border-bottom: 3px solid var(--red); }
+
+.info-section p,
+.history-section p,
+.mutawalli-details p,
+.historical-event p,
+.victory-section p,
+.miracle-section p,
+.relic-section p,
+.succession-section p,
+.artifacts-section p,
+.gallery-intro,
+.contact-detail p,
+.majlis-schedule p,
+.activities-list li,
+.form-note {
+  color: var(--text-light);
+}
+
+.mutawalli-details strong,
+.contact-detail strong,
+.majlis-schedule strong {
+  color: var(--gold);
+}
+
+.activities-list li { border-bottom-color: rgba(245, 192, 78, 0.22); }
+.activities-list li:hover { color: #fff; }
+.majlis-schedule p { border-bottom-color: rgba(255, 255, 255, 0.1); }
+
+.glowing-star {
+  color: var(--gold);
+  text-shadow: 0 0 14px rgba(245, 192, 78, 0.8), 0 0 28px rgba(225, 29, 18, 0.6);
+}
+
+/* ---------- Prayer times, contact boxes ---------- */
+.prayer-time,
+.contact-detail {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--gold);
+}
+
+.prayer-time { border-top: 3px solid var(--gold); }
+.prayer-name { color: var(--text-light); }
+.prayer-hour { color: var(--gold); }
+
+.prayer-time:hover {
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 22px rgba(245, 192, 78, 0.35);
+}
+
+/* ---------- Gallery ---------- */
+.gallery-item {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(245, 192, 78, 0.25);
+}
+
+.gallery-item:hover {
+  border-color: var(--gold);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(245, 192, 78, 0.4);
+}
+
+.gallery-overlay {
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.92));
+}
+
+.gallery-icon { color: var(--red); }
+
+/* ---------- Map ---------- */
+.map-container { border: 3px solid var(--gold); }
+.map-overlay { background: rgba(0, 0, 0, 0.7); border: 1px solid var(--gold); }
+.map-overlay p { color: var(--gold-soft); }
+.map-overlay img { border-color: var(--gold); }
+
+/* ---------- Connect with us ---------- */
+.connect-icon {
+  color: var(--gold-soft);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.connect-icon:hover { color: #fff; border-color: transparent; }
+
+/* ---------- Form (transparent inputs) ---------- */
+.form-group label { color: var(--gold); }
+.form-group label i { color: var(--red); }
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.form-group select option {
+  color: #fff;
+  background: #1a0000;
+}
+
+.form-group input:hover,
+.form-group select:hover,
+.form-group textarea:hover {
+  border-color: rgba(245, 192, 78, 0.6);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--gold);
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 0 0 4px rgba(245, 192, 78, 0.18);
+}
+
+/* ---------- Footer: black + red + gold flowing ---------- */
+.site-footer {
+  background:
+    linear-gradient(120deg,
+      #000000 0%, #3a0000 20%, #000000 40%,
+      #4a3200 55%, #000000 70%, #5a0000 85%, #000000 100%);
+  background-size: 300% 100%;
+  animation: goldFlow 14s linear infinite;
+}
+
+.footer-logo img {
+  border: 3px solid var(--gold);
+  box-shadow: 0 0 22px rgba(245, 192, 78, 0.6), 0 0 44px rgba(225, 29, 18, 0.4);
+}
+
+.footer-text { color: var(--gold-soft); }
+.footer-social-title { color: var(--gold); letter-spacing: 0.08em; }
+
+.footer-social-icon {
+  color: var(--gold-soft);
+  border: 1px solid rgba(245, 192, 78, 0.35);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.copyright {
+  color: var(--gold);
+  border-top: 1px solid rgba(245, 192, 78, 0.3);
+}
+
+/* ---------- Scrollbar ---------- */
+::-webkit-scrollbar-track { background: #000; }
+::-webkit-scrollbar-thumb { background: linear-gradient(var(--red), var(--gold)); }
+
+/* ---------- Mobile touch-ups ---------- */
+@media (max-width: 768px) {
+  .nav-menu {
+    background: rgba(0, 0, 0, 0.96);
+    border-bottom: 2px solid var(--gold);
+  }
+
+  .content-section {
+    background: rgba(10, 0, 0, 0.5);
+  }
+
+  .page-header h1 { filter: drop-shadow(0 0 8px rgba(225, 29, 18, 0.7)); }
+}
